@@ -93,8 +93,6 @@ public class GUI {
         ImageIcon img = new ImageIcon("./Logos/B1G.png");
         frame.setIconImage(img.getImage());
         frame.setVisible(true);
-
-
     }
     
     public static void placeTeams() throws IOException {

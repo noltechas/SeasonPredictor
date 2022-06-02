@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Team {
     public String name;
     public String division;
     public ArrayList<String> results = new ArrayList<>();
+    public ArrayList<Team> teamsBeat = new ArrayList<>();
+    public ArrayList<Team> teamsLost = new ArrayList<>();
 
     public int momentum = 0;
 
@@ -217,5 +220,15 @@ public class Team {
 
     public void addPlayoff() {
         this.playoffs++;
+    }
+
+    public int getResult(Team opponent){
+        if(teamsBeat.contains(opponent)){
+            return 1;
+        }
+        if(teamsLost.contains(opponent)){
+            return -1;
+        }
+        return 0;
     }
 }

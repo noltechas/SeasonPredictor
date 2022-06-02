@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static boolean singleSeason = true;
+    public static boolean singleSeason = false;
     public static int week = 0;
     public static void main(String[] args) throws IOException {
 
@@ -25,7 +25,7 @@ public class Main {
         BigTen.addTeam(Michigan);BigTen.addTeam(OhioState);BigTen.addTeam(MichiganState);BigTen.addTeam(PennState);BigTen.addTeam(Maryland);BigTen.addTeam(Rutgers);BigTen.addTeam(Indiana);BigTen.addTeam(Iowa);BigTen.addTeam(Wisconsin);BigTen.addTeam(Minnesota);BigTen.addTeam(Purdue);BigTen.addTeam(Illinois);BigTen.addTeam(Nebraska);BigTen.addTeam(Northwestern);
 
         Schedule schedule = new Schedule(BigTen);
-        GUI gui = new GUI(BigTen,schedule);
+        GUI gui;
 
         schedule.addGame(0,Nebraska,Northwestern, 13F,51.0F);
         schedule.addGame(0,"Wyoming",Illinois, -10F,46F);
@@ -110,7 +110,7 @@ public class Main {
 
         schedule.addGame(9,OhioState,PennState, 12F,50F);
         schedule.addGame(9,MichiganState,Michigan, -8.5F,50F);
-        schedule.addGame(9,Illinois,Nebraska, -13.5F,50F);
+        schedule.addGame(9,Illinois,Nebraska, -15.5F,50F);
         schedule.addGame(9,Rutgers,Minnesota, -8.5F,50F);
         schedule.addGame(9,Northwestern,Iowa, -18.5F,50F);
 
@@ -130,7 +130,7 @@ public class Main {
         schedule.addGame(11,Indiana,OhioState, -29.5F,50F);
         schedule.addGame(11,Maryland,PennState, -16.5F,50F);
 
-        schedule.addGame(12,Wisconsin,Nebraska, -1.5F,50F);
+        schedule.addGame(12,Wisconsin,Nebraska, -2.5F,50F);
         schedule.addGame(12,Iowa,Minnesota, 5.5F,50F);
         schedule.addGame(12,Northwestern,Purdue, -11F,50F);
         schedule.addGame(12,OhioState,Maryland, 24.5F,50F);
@@ -148,7 +148,7 @@ public class Main {
 
         if(!singleSeason) {
 
-            Season season = new Season(schedule, 1000000);
+            Season season = new Season(schedule, 11000);
 
             OhioState.printResults();
             Michigan.printResults();
@@ -166,19 +166,26 @@ public class Main {
             Northwestern.printResults();
             Nebraska.printResults();
         }
+        if(singleSeason){
+            gui = new GUI(BigTen,schedule);
+        }
 
     }
 
     public static void advanceWeek(Schedule schedule) throws IOException {
-        Scanner myObj = new Scanner(System.in);
+        ChampionshipGUI championshipGUI;
         if (week < 14) {
             schedule.playWeek(week);
             GUI.placeTeams();
         }
-        else {
-            System.out.println("Click Enter to Advance to Championship");
-            String userName = myObj.nextLine();
+        else if (week == 14) {
+            schedule.setChampionship();
+            championshipGUI = new ChampionshipGUI(schedule.championship, schedule.conference, schedule);
+            ChampionshipGUI.placeTeams();
+        }
+        else{
             schedule.playChampionship();
+            ChampionshipGUI.placeTeams();
         }
         week++;
     }

@@ -10,6 +10,8 @@ public class Game {
     public Team winner = null;
     public String homeName;
     public String awayName;
+    public int homeScore = 0;
+    public int awayScore = 0;
 
     public float spread;
     public float overUnder;
@@ -117,6 +119,10 @@ public class Game {
                 away.momentum--;
             }
             if(home!=null && away!=null) {
+                this.homeScore = homeTeamPoints;
+                this.awayScore = awayTeamPoints;
+                home.teamsBeat.add(away);
+                away.teamsLost.add(home);
                 home.addConferenceWin();
                 away.addConferenceLoss();
                 if (home.getDivision().equals(away.getDivision())) {
@@ -152,6 +158,10 @@ public class Game {
                     away.momentum++;
             }
             if(home!=null && away!=null) {
+                this.homeScore = homeTeamPoints;
+                this.awayScore = awayTeamPoints;
+                home.teamsLost.add(away);
+                away.teamsBeat.add(home);
                 home.addConferenceLoss();
                 away.addConferenceWin();
                 if (home.getDivision() == away.getDivision()) {
@@ -186,5 +196,9 @@ public class Game {
         }
 
         team.results.add(0,text);
+    }
+
+    public float getSpread(){
+        return this.spread;
     }
 }

@@ -5,6 +5,7 @@ public class Season {
             for (int i = 0; i < 14; i++) {
                 schedule.playWeek(i);
             }
+            schedule.setChampionship();
             schedule.playChampionship();
             schedule.recordResults();
         }
