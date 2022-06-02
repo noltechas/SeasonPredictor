@@ -1,8 +1,10 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Team {
     public String name;
     public String division;
+    public ArrayList<String> results = new ArrayList<>();
 
     public int momentum = 0;
 
@@ -44,6 +46,7 @@ public class Team {
     public Team(String name, float rating){
         this.teamRating  = rating;
         this.name = name;
+        this.results.add("");
     }
 
     public void clearStats(){
@@ -107,6 +110,10 @@ public class Team {
 
     public int getWins() {
         return this.totalWins;
+    }
+
+    public int getTeamRating(){
+        return (int) this.teamRating;
     }
 
     public float getRecord(){

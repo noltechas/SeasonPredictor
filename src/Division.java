@@ -19,6 +19,7 @@ public class Division {
     }
 
     public ArrayList<Team> getStandings(){
+        teams.sort(Comparator.comparing(Team::getTeamRating));
         teams.sort(Comparator.comparingInt(Team::getLosses));
         teams.sort(Comparator.comparingInt(Team::getWins));
         teams.sort(Comparator.comparingInt(Team::getDivisionWins));

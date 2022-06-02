@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
@@ -90,8 +91,9 @@ public class Game {
 
         if(homeTeamPoints > awayTeamPoints){
             if(home!=null) {
-                home.addWin();
                 this.winner = home;
+                addResult(home,homeTeamPoints,awayTeamPoints);
+                home.addWin();
                 if(-this.spread > -14)
                     home.momentum++;
                 if(-this.spread > 0)
@@ -102,6 +104,7 @@ public class Game {
                     home.momentum++;
             }
             if(away!=null) {
+                addResult(away,homeTeamPoints,awayTeamPoints);
                 if(-this.spread > -14)
                     away.momentum--;
                 if(-this.spread > 0)
@@ -125,6 +128,7 @@ public class Game {
         if(awayTeamPoints > homeTeamPoints){
             if(home!=null) {
                 home.addLoss();
+                addResult(home,awayTeamPoints,homeTeamPoints);
                 if(-this.spread < 14)
                     home.momentum--;
                 if(-this.spread < 0)
@@ -136,6 +140,7 @@ public class Game {
             }
             if(away!=null) {
                 this.winner = away;
+                addResult(away,awayTeamPoints,homeTeamPoints);
                 away.addWin();
                 if(-this.spread < 14)
                     away.momentum++;
@@ -155,5 +160,31 @@ public class Game {
                 }
             }
         }
+    }
+
+    public void addResult(Team team, int winningScore, int losingScore){
+        String text;
+        String vsText;
+        String opponentName;
+        if(homeName == team.name){
+            opponentName = awayName;
+        }
+        else{
+            opponentName = homeName;
+        }
+        if(team == this.home){
+            vsText = " vs. ";
+        }
+        else{
+            vsText = " @ ";
+        }
+        if(team == this.winner){
+            text = "W " + winningScore + "-" + losingScore + vsText + opponentName;
+        }
+        else{
+            text = "L " + winningScore + "-" + losingScore + vsText + opponentName;
+        }
+
+        team.results.add(0,text);
     }
 }
