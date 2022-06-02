@@ -28,15 +28,4 @@ public class Conference {
         }
     }
 
-    public void showStandings(){
-        System.out.println(div1.name);
-        System.out.println("----------------");
-        for(int i = 0; i < totalTeams/2; i++)
-            System.out.println(div1.teams.get(i).name);
-        System.out.println("----------------");
-        System.out.println(div2.name);
-        System.out.println("----------------");
-        for(int i = 0; i < totalTeams/2; i++)
-            System.out.println(div2.teams.get(i).name);
-    }
 }

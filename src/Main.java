@@ -1,8 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static boolean singleSeason = true;
-    public static void main(String[] args){
+    public static int week = 0;
+    public static void main(String[] args) throws IOException {
 
         Conference BigTen = new Conference("Big Ten","East","West",14);
 
@@ -23,6 +25,7 @@ public class Main {
         BigTen.addTeam(Michigan);BigTen.addTeam(OhioState);BigTen.addTeam(MichiganState);BigTen.addTeam(PennState);BigTen.addTeam(Maryland);BigTen.addTeam(Rutgers);BigTen.addTeam(Indiana);BigTen.addTeam(Iowa);BigTen.addTeam(Wisconsin);BigTen.addTeam(Minnesota);BigTen.addTeam(Purdue);BigTen.addTeam(Illinois);BigTen.addTeam(Nebraska);BigTen.addTeam(Northwestern);
 
         Schedule schedule = new Schedule(BigTen);
+        GUI gui = new GUI(BigTen,schedule);
 
         schedule.addGame(0,Nebraska,Northwestern, 13F,51.0F);
         schedule.addGame(0,"Wyoming",Illinois, -10F,46F);
@@ -163,24 +166,21 @@ public class Main {
             Northwestern.printResults();
             Nebraska.printResults();
         }
+
+    }
+
+    public static void advanceWeek(Schedule schedule) throws IOException {
+        Scanner myObj = new Scanner(System.in);
+        if (week < 14) {
+            schedule.playWeek(week);
+            GUI.placeTeams();
+        }
         else {
-            Scanner myObj = new Scanner(System.in);
-            for (int i = 0; i < 14; i++) {
-                System.out.println("Click Enter to Continue");
-                String userName = myObj.nextLine();
-                System.out.println();
-                schedule.playWeek(i);
-                System.out.println();
-                schedule.printStandings();
-            }
             System.out.println("Click Enter to Advance to Championship");
             String userName = myObj.nextLine();
             schedule.playChampionship();
         }
-
-
-
-
+        week++;
     }
 
 }
