@@ -5,6 +5,7 @@ import java.util.Comparator;
 public class Team {
     public String name;
     public String division;
+    public Conference conference;
     public ArrayList<String> results = new ArrayList<>();
     public ArrayList<Team> teamsBeat = new ArrayList<>();
     public ArrayList<Team> teamsLost = new ArrayList<>();
@@ -230,5 +231,11 @@ public class Team {
             return -1;
         }
         return 0;
+    }
+
+    public boolean sameConference(Team opponent){
+        if(opponent.conference.name == this.conference.name)
+            return true;
+        return false;
     }
 }

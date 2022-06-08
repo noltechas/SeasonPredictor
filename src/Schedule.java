@@ -8,11 +8,10 @@ public class Schedule {
     public ArrayList<Week> weeks;
     public float spreadSD = 14.5F;
     public float overUnderSD = 13.5F;
-    public Conference conference;
-    public Game championship;
+    public League league;
 
-    public Schedule(Conference conference){
-        this.conference = conference;
+    public Schedule(League league){
+        this.league = league;
         weeks = new ArrayList<>();
         for(int i = 0; i < 14; i++){
             weeks.add(new Week(i));
@@ -41,37 +40,27 @@ public class Schedule {
     }
 
     public void recordResults() {
-        ArrayList<Team> div1teams = new ArrayList<>(conference.div1.teams);
-        div1teams.sort(Division.teamComparator);
-        Collections.reverse(div1teams);
-        ArrayList<Team> div2teams = new ArrayList<>(conference.div2.teams);
-        div2teams.sort(Division.teamComparator);
-        Collections.reverse(div2teams);
-        for(int i = 0; i < 7; i++){
-            conference.div1.teams.get(i).recordResults(div1teams);
-            conference.div2.teams.get(i).recordResults(div2teams);
+        for(int i = 0; i < this.league.conferences.size(); i++) {
+            if(this.league.conferences.get(i).hasDivisions) {
+                ArrayList<Team> div1teams = new ArrayList<>(this.league.conferences.get(i).div1.teams);
+                div1teams.sort(Division.teamComparator);
+                Collections.reverse(div1teams);
+                ArrayList<Team> div2teams = new ArrayList<>(this.league.conferences.get(i).div2.teams);
+                div2teams.sort(Division.teamComparator);
+                Collections.reverse(div2teams);
+                for (int j = 0; j < 7; j++) {
+                    this.league.conferences.get(j).div1.teams.get(j).recordResults(div1teams);
+                    this.league.conferences.get(j).div2.teams.get(j).recordResults(div2teams);
+                }
+            }
+            else{
+                ArrayList<Team> div1teams = new ArrayList<>(this.league.conferences.get(i).div1.teams);
+                div1teams.sort(Division.teamComparator);
+                Collections.reverse(div1teams);
+                for (int j = 0; j < 7; j++) {
+                    this.league.conferences.get(j).div1.teams.get(j).recordResults(div1teams);
+                }
+            }
         }
-    }
-
-    public void setChampionship(){
-        championship = new Game(conference.div1.getWinner(),conference.div2.getWinner(),conference.div1.getWinner().teamRating-conference.div2.getWinner().teamRating,50,spreadSD,overUnderSD);
-    }
-
-    public void playChampionship(){
-        Team div1Champ = conference.div1.getWinner();
-        Team div2Champ = conference.div2.getWinner();
-
-        float gameSpread = (div1Champ.teamRating+div1Champ.momentum) - (div2Champ.teamRating+div2Champ.momentum);
-
-        if(Main.singleSeason){
-            System.out.println("Championship Game: " + div1Champ.name + " vs. " + div2Champ.name);
-            System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
-        }
-
-        championship.play();
-
-        championship.winner.addChampionship();
-        if(championship.winner.totalLosses <= 1)
-            championship.winner.addPlayoff();
     }
 }

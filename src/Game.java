@@ -123,8 +123,10 @@ public class Game {
                 this.awayScore = awayTeamPoints;
                 home.teamsBeat.add(away);
                 away.teamsLost.add(home);
-                home.addConferenceWin();
-                away.addConferenceLoss();
+                if(home.sameConference(away)) {
+                    home.addConferenceWin();
+                    away.addConferenceLoss();
+                }
                 if (home.getDivision().equals(away.getDivision())) {
                     home.addDivisionWin();
                     away.addDivisionLoss();
@@ -162,8 +164,10 @@ public class Game {
                 this.awayScore = awayTeamPoints;
                 home.teamsLost.add(away);
                 away.teamsBeat.add(home);
-                home.addConferenceLoss();
-                away.addConferenceWin();
+                if(home.sameConference(away)) {
+                    home.addConferenceLoss();
+                    away.addConferenceWin();
+                }
                 if (home.getDivision() == away.getDivision()) {
                     home.addDivisionLoss();
                     away.addDivisionWin();
