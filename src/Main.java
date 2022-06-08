@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Conference BigTen = new Conference("Big Ten","East","West",14);
+        Conference Big12 = new Conference("Big 12",10);
 
         Team Michigan = new Team("Michigan",19F);
         Team OhioState = new Team("Ohio State", 29.5F);
@@ -57,7 +58,7 @@ public class Main {
         schedule.addGame(2,"Idaho",Indiana, -31.5F,60F);
         schedule.addGame(2,"Hawaii",Michigan, -40.5F,55F);
 
-        schedule.addGame(3,"Oklahoma",Nebraska, 5F,50F);
+        schedule.addGame(3,"Oklahoma",Nebraska, 3F,50F);
         schedule.addGame(3,PennState,"Auburn", -1F,50F);
         schedule.addGame(3,Rutgers,"Temple", 9.5F,52F);
         schedule.addGame(3,"UConn",Michigan, -50F,62F);

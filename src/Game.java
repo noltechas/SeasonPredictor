@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Game {
 
-    public boolean print = true;
+    public boolean print = false;
 
     public Team home = null;
     public Team away = null;

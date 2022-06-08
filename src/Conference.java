@@ -17,6 +17,11 @@ public class Conference {
         this.totalTeams = totalTeams;
     }
 
+    public Conference(String name, int totalTeams) {
+        this.name = name;
+        this.totalTeams = totalTeams;
+    }
+
     public void addTeam(Team team){
         if(div1.getSize() >= totalTeams/2){
             div2.addTeam(team);
