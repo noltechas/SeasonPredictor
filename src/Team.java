@@ -281,9 +281,27 @@ public class Team {
     }
 
     public float getAdjustedScore(){
+        float avgMOV = 0;
+        if(totalWins+totalLosses > 0)
+            avgMOV = (float)marginOfVictory/((float)totalWins+(float)totalLosses);
+        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + championships*0.45F + getTeamRating()*0.01F + avgMOV*0.02F;
+
         if(totalLosses > 1)
-            return getTeamsBeatRankings() + 2*getFinalRatings() - 0.411F*totalLosses + championships*0.33F;
+            score -= 0.466F*totalLosses;
         else
-            return getTeamsBeatRankings() + 2*getFinalRatings() - 0.3F*totalLosses + championships*0.33F;
+            score -= 0.3F*totalLosses;
+
+        if(totalWins > 11)
+            score += 0.411F;
+        if(conference.name == "American")
+            score -= 0.22F;
+
+        if(championships > 0 && totalLosses <= 1 && !conference.name.equals("American"))
+            score += 0.33F;
+
+        if(totalLosses+totalWins == 13)
+            score += 0.21F;
+
+        return score;
     }
 }

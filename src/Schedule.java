@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Schedule {
 
     public ArrayList<Week> weeks;
-    public float spreadSD = 14.5F;
+    public float spreadSD = 12.5F;
     public float overUnderSD = 13.5F;
     public League league;
 

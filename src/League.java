@@ -54,7 +54,7 @@ public class League {
 
     public static void printPoll(){
         ArrayList<Team> poll = new ArrayList<>(getPoll());
-        for(int i = 0; i < poll.size(); i++){
+        for(int i = 0; i < 25; i++){
             System.out.println((i+1) + ". " + poll.get(i).name + " (" + poll.get(i).totalWins + "-" + poll.get(i).totalLosses + ") Score: " + poll.get(i).getAdjustedScore());
         }
     }

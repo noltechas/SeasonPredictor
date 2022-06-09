@@ -66,14 +66,14 @@ public class Game {
 
         if(this.spread+((float)netMomentum*1) > 0) {
             if (Main.singleSeason)
-                System.out.println("Line: " + this.homeName + " " + -(this.spread + ((float) netMomentum * 0.5)));
+                System.out.println("Line: " + this.homeName + " " + -(this.spread + ((float) netMomentum * 0.2)));
         }
         if(this.spread+((float)netMomentum*1) <= 0){
             if(Main.singleSeason)
-                System.out.println("Line: " + this.homeName + " +" + -(this.spread + ((float) netMomentum * 0.5)));
+                System.out.println("Line: " + this.homeName + " +" + -(this.spread + ((float) netMomentum * 0.2)));
         }
 
-        double val2 = r.nextGaussian() * this.spreadSD + this.spread+((float)netMomentum*0.5);
+        double val2 = r.nextGaussian() * this.spreadSD + this.spread+((float)netMomentum*0.4);
 
         int homeTeamPoints = finalPoints/2 + (int)val2/2;
         if(homeTeamPoints < 2)

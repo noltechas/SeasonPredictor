@@ -441,7 +441,7 @@ public class Main {
         schedule.addGame(7,Auburn,OleMiss, -6.5F,50F);
         schedule.addGame(7,Vanderbilt,Georgia, -31.5F,57F);
         schedule.addGame(7,LSU,Florida, -3F,52F);
-        schedule.addGame(7,Alabama,Tennessee, -13.5F,60F);
+        schedule.addGame(7,Alabama,Tennessee, 13.5F,60F);
         schedule.addGame(7,Stanford,"Notre Dame", -15.5F,48.5F);
 
         schedule.addGame(8,Iowa,OhioState, -21F,50F);
