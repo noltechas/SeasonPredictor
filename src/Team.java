@@ -11,6 +11,11 @@ public class Team {
     public ArrayList<Team> teamsLost = new ArrayList<>();
 
     public int momentum = 0;
+    public int marginOfVictory = 0;
+    public int winsOfOpponents = 0;
+    public int winsOfTeamsBeat = 0;
+    // These need to update every week
+
 
     public float teamRating;
 
@@ -237,5 +242,48 @@ public class Team {
         if(opponent.conference.name == this.conference.name)
             return true;
         return false;
+    }
+
+    public float getR(){
+        float totalTeams = teamsBeat.size()+totalLosses;
+        return((float)(1+teamsBeat.size())/(2F+totalTeams));
+    }
+
+    public float getFirstCorrection(){
+        float wins = (float) teamsBeat.size();
+        float losses = (float) totalLosses;
+        return ((wins-losses)/2F) + (1F-getR());
+    }
+
+    public float getSecondR(){
+        float totalTeams = teamsBeat.size()+totalLosses;
+        return((1F + getFirstCorrection()) / (2F + totalTeams));
+    }
+
+    public float getSecondCorrection(){
+        float wins = (float) teamsBeat.size();
+        float losses = (float) totalLosses;
+        return ((wins-losses)/2F) + (1F-getSecondR());
+    }
+
+    public float getFinalRatings(){
+        float totalTeams = teamsBeat.size()+totalLosses;
+        return (1F + getSecondCorrection()) / (2 + totalTeams);
+    }
+
+    public float getTeamsBeatRankings(){
+        float score = 0;
+        for(int i = 0; i < this.teamsBeat.size(); i++){
+            if(this.teamsBeat.get(i).getFinalRatings() > 0)
+                score += this.teamsBeat.get(i).getFinalRatings();
+        }
+        return score;
+    }
+
+    public float getAdjustedScore(){
+        if(totalLosses > 1)
+            return getTeamsBeatRankings() + 2*getFinalRatings() - 0.411F*totalLosses + championships*0.33F;
+        else
+            return getTeamsBeatRankings() + 2*getFinalRatings() - 0.3F*totalLosses + championships*0.33F;
     }
 }

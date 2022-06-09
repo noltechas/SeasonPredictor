@@ -53,4 +53,11 @@ public class Division {
         Collections.reverse(div1teams);
         return div1teams.get(0);
     }
+
+    public Team getRunnerUp(){
+        ArrayList<Team> div1teams = new ArrayList<>(this.teams);
+        div1teams.sort(Division.teamComparator);
+        Collections.reverse(div1teams);
+        return div1teams.get(1);
+    }
 }

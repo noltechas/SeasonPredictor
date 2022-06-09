@@ -94,6 +94,7 @@ public class Game {
         if(homeTeamPoints > awayTeamPoints){
             if(home!=null) {
                 this.winner = home;
+                home.marginOfVictory += homeTeamPoints-awayTeamPoints;
                 addResult(home,homeTeamPoints,awayTeamPoints);
                 home.addWin();
                 if(-this.spread > -14)
@@ -106,6 +107,7 @@ public class Game {
                     home.momentum++;
             }
             if(away!=null) {
+                away.marginOfVictory += awayTeamPoints-homeTeamPoints;
                 addResult(away,homeTeamPoints,awayTeamPoints);
                 if(-this.spread > -14)
                     away.momentum--;
@@ -136,6 +138,7 @@ public class Game {
         if(awayTeamPoints > homeTeamPoints){
             if(home!=null) {
                 home.addLoss();
+                home.marginOfVictory += homeTeamPoints-awayTeamPoints;
                 addResult(home,awayTeamPoints,homeTeamPoints);
                 if(-this.spread < 14)
                     home.momentum--;
@@ -148,6 +151,7 @@ public class Game {
             }
             if(away!=null) {
                 this.winner = away;
+                away.marginOfVictory += awayTeamPoints-homeTeamPoints;
                 addResult(away,awayTeamPoints,homeTeamPoints);
                 away.addWin();
                 if(-this.spread < 14)

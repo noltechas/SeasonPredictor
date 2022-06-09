@@ -47,7 +47,9 @@ public class Conference {
 
     public void setChampionship(){
         if(hasDivisions)
-            championship = new Game(div1.getWinner(),div2.getWinner(),div1.getWinner().teamRating-div2.getWinner().teamRating,50,14.5F,13.5F);
+            this.championship = new Game(div1.getWinner(),div2.getWinner(),div1.getWinner().teamRating-div2.getWinner().teamRating,50,14.5F,13.5F);
+        else
+            this.championship = new Game(div1.getRunnerUp(),div1.getWinner(),div1.getRunnerUp().teamRating-div1.getWinner().teamRating,50,14.5F,13.5F);
     }
 
     public void playChampionship(){
@@ -68,6 +70,30 @@ public class Conference {
             if (championship.winner.totalLosses <= 1)
                 championship.winner.addPlayoff();
         }
+        else{
+            Team div1Champ = div1.getRunnerUp();
+            Team div2Champ = div1.getWinner();
+
+            float gameSpread = (div1Champ.teamRating + div1Champ.momentum) - (div2Champ.teamRating + div2Champ.momentum);
+
+            if (Main.singleSeason) {
+                System.out.println("Championship Game: " + div1Champ.name + " vs. " + div2Champ.name);
+                System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
+            }
+
+            championship.play();
+
+            championship.winner.addChampionship();
+            if (championship.winner.totalLosses <= 1)
+                championship.winner.addPlayoff();
+        }
+    }
+
+    public ArrayList<Team> getTeams(){
+        ArrayList<Team> teams = new ArrayList<Team>(div1.teams);
+        if(hasDivisions)
+            teams.addAll(div2.teams);
+        return teams;
     }
 
 }

@@ -266,6 +266,7 @@ public class GUI {
         public void actionPerformed(ActionEvent e){
             try {
                 Main.advanceWeek(schedule);
+                League.printPoll();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
