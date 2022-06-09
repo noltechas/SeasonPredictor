@@ -61,7 +61,7 @@ public class Conference {
 
             if (Main.singleSeason) {
                 System.out.println("Championship Game: " + div1Champ.name + " vs. " + div2Champ.name);
-                System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
+                //System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
             }
 
             championship.play();
@@ -78,7 +78,7 @@ public class Conference {
 
             if (Main.singleSeason) {
                 System.out.println("Championship Game: " + div1Champ.name + " vs. " + div2Champ.name);
-                System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
+                //System.out.println("Line: " + div1Champ.name + " -" + gameSpread);
             }
 
             championship.play();

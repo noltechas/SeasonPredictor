@@ -5,13 +5,15 @@ import java.util.Comparator;
 public class League {
 
     public static ArrayList<Conference> conferences;
+    public static ArrayList<Team> independents;
 
-    public League(ArrayList<Conference> conferences){
+    public League(ArrayList<Conference> conferences, ArrayList<Team> independents){
         this.conferences = new ArrayList<>(conferences);
+        this.independents = independents;
     }
 
     public static ArrayList<Team> getPoll(){
-        ArrayList<Team> poll = new ArrayList<>();
+        ArrayList<Team> poll = new ArrayList<>(independents);
         for(int i = 0; i < conferences.size(); i++){
             poll.addAll(conferences.get(i).getTeams());
         }

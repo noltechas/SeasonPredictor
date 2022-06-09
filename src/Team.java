@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Team {
     public String name;
-    public String division;
+    public String division = "";
     public Conference conference;
     public ArrayList<String> results = new ArrayList<>();
     public ArrayList<Team> teamsBeat = new ArrayList<>();
@@ -239,9 +240,9 @@ public class Team {
     }
 
     public boolean sameConference(Team opponent){
-        if(opponent.conference.name == this.conference.name)
-            return true;
-        return false;
+        if(conference == null || opponent.conference == null)
+            return false;
+        return Objects.equals(opponent.conference.name, this.conference.name);
     }
 
     public float getR(){
@@ -281,6 +282,12 @@ public class Team {
     }
 
     public float getAdjustedScore(){
+        String conferenceName;
+        if(conference != null)
+            conferenceName = conference.name;
+        else
+            conferenceName = "Independent";
+
         float avgMOV = 0;
         if(totalWins+totalLosses > 0)
             avgMOV = (float)marginOfVictory/((float)totalWins+(float)totalLosses);
@@ -293,14 +300,17 @@ public class Team {
 
         if(totalWins > 11)
             score += 0.411F;
-        if(conference.name == "American")
+        if(conferenceName == "American")
             score -= 0.22F;
 
-        if(championships > 0 && totalLosses <= 1 && !conference.name.equals("American"))
+        if(championships > 0 && totalLosses <= 1 && !conferenceName.equals("American"))
             score += 0.33F;
 
         if(totalLosses+totalWins == 13)
             score += 0.21F;
+
+        if(totalWins == 13 && !conferenceName.equals("American"))
+            score += 0.45;
 
         return score;
     }

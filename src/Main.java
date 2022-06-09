@@ -90,7 +90,7 @@ public class Main {
         Team LSU = new Team("LSU", 10.5F);
         SEC.addTeam(Georgia);SEC.addTeam(Kentucky);SEC.addTeam(Tennessee);SEC.addTeam(Missouri);SEC.addTeam(SouthCarolina);SEC.addTeam(Florida);SEC.addTeam(Vanderbilt);SEC.addTeam(Alabama);SEC.addTeam(OleMiss);SEC.addTeam(Arkansas);SEC.addTeam(MississippiState);SEC.addTeam(TexasAM);SEC.addTeam(Auburn);SEC.addTeam(LSU);
 
-        Team Cincinnati = new Team("Cincinnati",19F);
+        Team Cincinnati = new Team("Cincinnati",17F);
         Team Houston = new Team("Houston",13F);
         Team UCF = new Team("UCF",15F);
         Team EastCarolina = new Team("East Carolina",7.5F);
@@ -103,6 +103,11 @@ public class Main {
         Team Tulane = new Team("Tulane",1.5F);
         American.addTeam(Cincinnati);American.addTeam(Houston);American.addTeam(UCF);American.addTeam(EastCarolina);American.addTeam(Tulsa);American.addTeam(SMU);American.addTeam(Memphis);American.addTeam(Navy);American.addTeam(Temple);American.addTeam(USF);American.addTeam(Tulane);
 
+        Team NotreDame = new Team("Notre Dame", 18);
+        Team BYU = new Team("BYU", 16);
+        ArrayList<Team> independents = new ArrayList<>();
+        independents.add(NotreDame);independents.add(BYU);
+
         ArrayList<Conference> conferences = new ArrayList<>();
         conferences.add(BigTen);
         conferences.add(Big12);
@@ -110,7 +115,7 @@ public class Main {
         conferences.add(ACC);
         conferences.add(SEC);
         conferences.add(American);
-        league = new League(conferences);
+        league = new League(conferences, independents);
         Schedule schedule = new Schedule(league);
         GUI gui;
 
@@ -132,7 +137,7 @@ public class Main {
         schedule.addGame(1,"Colorado State",Michigan, -27.5F,57.5F);
         schedule.addGame(1,Rutgers,"Boston College", -7.5F,51.0F);
         schedule.addGame(1,"Illinois State",Wisconsin, -27.5F,60.0F);
-        schedule.addGame(1,"Notre Dame",OhioState, -14.5F,58.5F);
+        schedule.addGame(1,NotreDame,OhioState, -14.5F,58.5F);
         schedule.addGame(1,WestVirginia,Pitt, -7F,54.5F);
         schedule.addGame(1,"C Michigan",OKState, -21F,58F);
         schedule.addGame(1,"Tennessee Tech",Kansas, -30.5F,60F);
@@ -162,7 +167,7 @@ public class Main {
         schedule.addGame(1,Cincinnati,"Arkansas", -7F,53.5F);
         schedule.addGame(1,Oregon,Georgia, -17.5F,50.5F);
         schedule.addGame(1,"UC Davis",Cal, -19.5F,50F);
-        schedule.addGame(1,"BYU",USF, -12F,57.5F);
+        schedule.addGame(1,BYU,USF, -12F,57.5F);
         schedule.addGame(1,"Troy",OleMiss, -23.5F,61F);
         schedule.addGame(1,"Rice",USC, -35.5F,64.5F);
         schedule.addGame(1,"UMASS",Tulane, -29.5F,60F);
@@ -204,7 +209,7 @@ public class Main {
         schedule.addGame(2,"Kent State",Oklahoma, -29.5F,60F);
         schedule.addGame(2,ArizonaState,OKState, -12F,60F);
         schedule.addGame(2,"Tarleton",TCU, -40F,65F);
-        schedule.addGame(2,Baylor,"BYU", -1.5F,51.5F);
+        schedule.addGame(2,Baylor,BYU, -1.5F,51.5F);
         schedule.addGame(2,Louisville,UCF, -7.5F,57.5F);
         schedule.addGame(2,"Lafayette",Temple, -19.5F,58F);
         schedule.addGame(2,"Southern Miss",Miami, -20.5F,55F);
@@ -239,6 +244,7 @@ public class Main {
         schedule.addGame(2,OregonState,"Fresno State", 3.5F,50F);
         schedule.addGame(2,MississippiState,Arizona, 16.5F,52F);
         schedule.addGame(2,Kentucky,Florida, -4F,50F);
+        schedule.addGame(2,"Marshall",NotreDame, -26F,54F);
 
         schedule.addGame(3,Oklahoma,Nebraska, 3F,50F);
         schedule.addGame(3,PennState,Auburn, -1F,50F);
@@ -250,7 +256,7 @@ public class Main {
         schedule.addGame(3,Colorado,Minnesota, -12.5F,50F);
         schedule.addGame(3,"New Mexico State",Wisconsin, -42.5F,60F);
         schedule.addGame(3,"Toledo",OhioState, -47.5F,64F);
-        schedule.addGame(3,MichiganState,"Washington", 3F,50F);
+        schedule.addGame(3,MichiganState,Washington, 3F,50F);
         schedule.addGame(3,"Nevada",Iowa, -29F,60F);
         schedule.addGame(3,SMU,Maryland, -17F,53F);
         schedule.addGame(3,"Texas State",Baylor, -27.5F,56F);
@@ -269,8 +275,8 @@ public class Main {
         schedule.addGame(3,Cincinnati,"Miami (OH)", 19.5F,54F);
         schedule.addGame(3,"Old Dominion",Virginia, -18.5F,50F);
         schedule.addGame(3,"S Alabama",UCLA, -22.5F,56F);
-        schedule.addGame(3,Cal,"Notre Dame", -16F,51.5F);
-        schedule.addGame(3,"BYU",Oregon, -6.5F,49F);
+        schedule.addGame(3,Cal,NotreDame, -16F,51.5F);
+        schedule.addGame(3,BYU,Oregon, -6.5F,49F);
         schedule.addGame(3,OleMiss,GeorgiaTech, 10.5F,55F);
         schedule.addGame(3,Vanderbilt,"N Illinois", 6.5F,50F);
         schedule.addGame(3,"LA-Monroe",Alabama, -36.5F,64F);
@@ -330,7 +336,7 @@ public class Main {
         schedule.addGame(4,Clemson,WakeForest, 9F,59F);
         schedule.addGame(4,USF,Louisville, -12.5F,53F);
         schedule.addGame(4,"Middle Tenn",Miami, -18.5F,56F);
-        schedule.addGame(4,"Notre Dame",NorthCarolina, 6.5F,50F);
+        schedule.addGame(4,NotreDame,NorthCarolina, 6.5F,50F);
         schedule.addGame(4,"Bowling Green",MississippiState, -17.5F,50F);
         schedule.addGame(4,Missouri,Auburn, -9.5F,50F);
         schedule.addGame(4,"Kent State",Georgia, -28.5F,60F);
@@ -341,6 +347,7 @@ public class Main {
         schedule.addGame(4,Florida,Tennessee, -3.5F,50F);
         schedule.addGame(4,Arkansas,TexasAM, -5.5F,53.5F);
         schedule.addGame(4,"New Mexico",LSU, -20.5F,56.5F);
+        schedule.addGame(4,"Wyoming",BYU, -19.5F,54.5F);
 
         schedule.addGame(5,Michigan,Iowa, 3.5F,50F);
         schedule.addGame(5,Indiana,Nebraska, -14.5F,54F);
@@ -380,6 +387,7 @@ public class Main {
         schedule.addGame(5,Alabama,Arkansas, 16.5F,60.5F);
         schedule.addGame(5,Georgia,Missouri, 22.5F,58.5F);
         schedule.addGame(5,Navy,"Air Force", -2.5F,50F);
+        schedule.addGame(5,"Utah State",BYU, -12.5F,50F);
 
         schedule.addGame(6,OhioState,MichiganState, 11.5F,50F);
         schedule.addGame(6,Nebraska,Rutgers, 10.5F,50F);
@@ -414,6 +422,7 @@ public class Main {
         schedule.addGame(6,Tennessee,LSU, -2.5F,50F);
         schedule.addGame(6,SouthCarolina,Kentucky, -3.5F,50F);
         schedule.addGame(6,Tulsa,Navy, -2.5F,55F);
+        schedule.addGame(6,BYU,NotreDame, -6.5F,55F);
 
         schedule.addGame(7,PennState,Michigan, -7F,50F);
         schedule.addGame(7,Wisconsin,MichiganState, -2F,50F);
@@ -436,13 +445,13 @@ public class Main {
         schedule.addGame(7,USC,Utah, -2.5F,50F);
         schedule.addGame(7,Clemson,FloridaState, 4.5F,50F);
         schedule.addGame(7,Miami,VirginiaTech, 2.5F,50F);
-        schedule.addGame(7,Arkansas,"BYU", 5.5F,50F);
+        schedule.addGame(7,Arkansas,BYU, 5.5F,50F);
         schedule.addGame(7,MississippiState,Kentucky, -4.5F,50F);
         schedule.addGame(7,Auburn,OleMiss, -6.5F,50F);
         schedule.addGame(7,Vanderbilt,Georgia, -31.5F,57F);
         schedule.addGame(7,LSU,Florida, -3F,52F);
         schedule.addGame(7,Alabama,Tennessee, 13.5F,60F);
-        schedule.addGame(7,Stanford,"Notre Dame", -15.5F,48.5F);
+        schedule.addGame(7,Stanford,NotreDame, -15.5F,48.5F);
 
         schedule.addGame(8,Iowa,OhioState, -21F,50F);
         schedule.addGame(8,Indiana,Rutgers, -1.5F,50F);
@@ -472,6 +481,8 @@ public class Main {
         schedule.addGame(8,TexasAM,SouthCarolina, 2.5F,51F);
         schedule.addGame(8,OleMiss,LSU, -1F,55.5F);
         schedule.addGame(8,Vanderbilt,Missouri, -6.5F,50F);
+        schedule.addGame(8,BYU,"Liberty", 9.5F,50F);
+        schedule.addGame(8,"UNLV",NotreDame, -21.5F,56F);
 
         schedule.addGame(9,OhioState,PennState, 12F,50F);
         schedule.addGame(9,MichiganState,Michigan, -8.5F,50F);
@@ -484,13 +495,13 @@ public class Main {
         schedule.addGame(9,TCU,WestVirginia, -2.5F,55F);
         schedule.addGame(9,VirginiaTech,NCState, -7.5F,50F);
         schedule.addGame(9,Utah,WashingtonState, 6.5F,50F);
-        schedule.addGame(9,EastCarolina,"BYU", -9.5F,50F);
+        schedule.addGame(9,EastCarolina,BYU, -9.5F,50F);
         schedule.addGame(9,Oregon,Cal, 14.5F,50F);
         schedule.addGame(9,USF,Houston, -12.5F,55F);
         schedule.addGame(9,USC,Arizona, 18.5F,52F);
         schedule.addGame(9,ArizonaState,Colorado, 12.5F,51F);
         schedule.addGame(9,Cincinnati,UCF, -2.5F,57F);
-        schedule.addGame(9,"Notre Dame",Syracuse, 20.5F,53F);
+        schedule.addGame(9,NotreDame,Syracuse, 20.5F,53F);
         schedule.addGame(9,Miami,Virginia, 9.5F,50F);
         schedule.addGame(9,Stanford,UCLA, -10.5F,50F);
         schedule.addGame(9,SMU,Tulsa, -1.5F,55F);
@@ -543,7 +554,8 @@ public class Main {
         schedule.addGame(10,SouthCarolina,Vanderbilt, 14.5F,56F);
         schedule.addGame(10,Florida,TexasAM, -7F,49F);
         schedule.addGame(10,Kentucky,Missouri, 8.5F,51F);
-        schedule.addGame(10,Clemson,"Notre Dame", 2.5F,53F);
+        schedule.addGame(10,Clemson,NotreDame, 2.5F,53F);
+        schedule.addGame(10,BYU,"Boise State", 4.5F,50F);
 
 
         schedule.addGame(11,Nebraska,Michigan, -11.5F,48.5F);
@@ -583,7 +595,7 @@ public class Main {
         schedule.addGame(11,TexasAM,Auburn, 7.5F,50F);
         schedule.addGame(11,Georgia,MississippiState, 15.5F,53F);
         schedule.addGame(11,Missouri,Tennessee, -12.5F,52F);
-        schedule.addGame(11,"Notre Dame",Navy, 13F,50F);
+        schedule.addGame(11,NotreDame,Navy, 13F,50F);
 
         schedule.addGame(12,Wisconsin,Nebraska, 3F,47.5F);
         schedule.addGame(12,Iowa,Minnesota, 5.5F,50F);
@@ -627,7 +639,8 @@ public class Main {
         schedule.addGame(12,Florida,Vanderbilt, 15.5F,50F);
         schedule.addGame(12,"W Kentucky",Auburn, -25.5F,56F);
         schedule.addGame(12,"Austin Peay",Alabama, -40.5F,69F);
-        schedule.addGame(12,BostonCollege,"Notre Dame", -14.5F,52F);
+        schedule.addGame(12,BostonCollege,NotreDame, -14.5F,52F);
+        schedule.addGame(12,"Dixie State",BYU, -34.5F,63.5F);
 
         schedule.addGame(13,MichiganState,PennState, -6F,50F);
         schedule.addGame(13,Michigan,OhioState, -13.5F,50F);
@@ -657,8 +670,8 @@ public class Main {
         schedule.addGame(13,SouthCarolina,Clemson, -14F,55.5F);
         schedule.addGame(13,Syracuse,BostonCollege, -9,50F);
         schedule.addGame(13,WakeForest,Duke, 3.5F,50F);
-        schedule.addGame(13,"BYU",Stanford, 11.5F,50F);
-        schedule.addGame(13,"Notre Dame",USC, -2.5F,56.5F);
+        schedule.addGame(13,BYU,Stanford, 11.5F,50F);
+        schedule.addGame(13,NotreDame,USC, -2.5F,56.5F);
         schedule.addGame(13,Oregon,OregonState, 7F,49.5F);
         schedule.addGame(13,Virginia,VirginiaTech, -7F,50F);
         schedule.addGame(13,Pitt,Miami, -6.5F,50F);
