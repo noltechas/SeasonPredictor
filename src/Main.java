@@ -11,6 +11,10 @@ public class Main {
 
         Conference BigTen = new Conference("Big Ten","East","West",14);
         Conference Big12 = new Conference("Big 12",10);
+        Conference Pac12 = new Conference("Pac 12",12);
+        Conference ACC = new Conference("ACC","Atlantic","Coastal",14);
+        Conference SEC = new Conference("SEC","East","West",14);
+        Conference American = new Conference("American",11);
 
         Team Michigan = new Team("Michigan",19F);
         Team OhioState = new Team("Ohio State", 29.5F);
@@ -39,6 +43,65 @@ public class Main {
         Team TexasTech = new Team("Texas Tech",3.5F);
         Team Kansas = new Team("Kansas",-6.5F);
         Big12.addTeam(Oklahoma);Big12.addTeam(Texas);Big12.addTeam(OKState);Big12.addTeam(Baylor);Big12.addTeam(TCU);Big12.addTeam(IowaState);Big12.addTeam(KState);Big12.addTeam(WestVirginia);Big12.addTeam(TexasTech);Big12.addTeam(Kansas);
+
+        Team USC = new Team("USC", 19F);
+        Team Utah = new Team("Utah", 16.5F);
+        Team Oregon = new Team("Oregon", 15.5F);
+        Team UCLA = new Team("UCLA", 12.5F);
+        Team Washington = new Team("Washington", 7.5F);
+        Team ArizonaState = new Team("Arizona State", 5F);
+        Team OregonState = new Team("Oregon State", 2F);
+        Team WashingtonState = new Team("Washington State", 1.5F);
+        Team Stanford = new Team("Stanford", 1.5F);
+        Team Cal = new Team("Cal", 1F);
+        Team Colorado = new Team("Colorado", -3F);
+        Team Arizona = new Team("Arizona", -4.5F);
+        Pac12.addTeam(USC);Pac12.addTeam(Utah);Pac12.addTeam(Oregon);Pac12.addTeam(UCLA);Pac12.addTeam(Washington);Pac12.addTeam(ArizonaState);Pac12.addTeam(OregonState);Pac12.addTeam(WashingtonState);Pac12.addTeam(Stanford);Pac12.addTeam(Cal);Pac12.addTeam(Colorado);Pac12.addTeam(Arizona);
+
+        Team BostonCollege = new Team("Boston College",5F);
+        Team Clemson = new Team("Clemson",25F);
+        Team FloridaState = new Team("Florida State",11F);
+        Team Louisville = new Team("Louisville",4.5F);
+        Team NCState = new Team("NC State",15.5F);
+        Team Syracuse = new Team("Syracuse",2F);
+        Team WakeForest = new Team("Wake Forest",13F);
+        Team Duke = new Team("Duke",-2F);
+        Team GeorgiaTech = new Team("Georgia Tech",3F);
+        Team Miami = new Team("Miami",17F);
+        Team NorthCarolina = new Team("North Carolina",14.5F);
+        Team Pitt = new Team("Pitt",16F);
+        Team Virginia = new Team("Virginia",11F);
+        Team VirginiaTech = new Team("VirginiaTech",4F);
+        ACC.addTeam(BostonCollege);ACC.addTeam(Clemson);ACC.addTeam(FloridaState);ACC.addTeam(Louisville);ACC.addTeam(NCState);ACC.addTeam(Syracuse);ACC.addTeam(WakeForest);ACC.addTeam(Duke);ACC.addTeam(GeorgiaTech);ACC.addTeam(Miami);ACC.addTeam(NorthCarolina);ACC.addTeam(Pitt);ACC.addTeam(Virginia);ACC.addTeam(VirginiaTech);
+
+        Team Georgia = new Team("Georgia", 31);
+        Team Kentucky = new Team("Kentucky", 15);
+        Team Tennessee = new Team("Tennessee", 13.5F);
+        Team Missouri = new Team("Missouri", 12);
+        Team SouthCarolina = new Team("South Carolina", 13);
+        Team Florida = new Team("Florida", 15);
+        Team Vanderbilt = new Team("Vanderbilt", 3.5F);
+        Team Alabama = new Team("Alabama", 33F);
+        Team OleMiss = new Team("Ole Miss", 21F);
+        Team Arkansas = new Team("Arkansas", 17.5F);
+        Team MississippiState = new Team("Mississippi State", 12.5F);
+        Team TexasAM = new Team("Texas A&M", 20F);
+        Team Auburn = new Team("Auburn", 10F);
+        Team LSU = new Team("LSU", 10.5F);
+        SEC.addTeam(Georgia);SEC.addTeam(Kentucky);SEC.addTeam(Tennessee);SEC.addTeam(Missouri);SEC.addTeam(SouthCarolina);SEC.addTeam(Florida);SEC.addTeam(Vanderbilt);SEC.addTeam(Alabama);SEC.addTeam(OleMiss);SEC.addTeam(Arkansas);SEC.addTeam(MississippiState);SEC.addTeam(TexasAM);SEC.addTeam(Auburn);SEC.addTeam(LSU);
+
+        Team Cincinnati = new Team("Cincinnati",19F);
+        Team Houston = new Team("Houston",13F);
+        Team UCF = new Team("UCF",15F);
+        Team EastCarolina = new Team("East Carolina",7.5F);
+        Team Tulsa = new Team("Tulsa",7.5F);
+        Team SMU = new Team("SMU",8F);
+        Team Memphis = new Team("Memphis",10F);
+        Team Navy = new Team("Navy",5F);
+        Team Temple = new Team("Temple",4.5F);
+        Team USF = new Team("USF",2.5F);
+        Team Tulane = new Team("Tulane",1.5F);
+        American.addTeam(Cincinnati);American.addTeam(Houston);American.addTeam(UCF);American.addTeam(EastCarolina);American.addTeam(Tulsa);American.addTeam(SMU);American.addTeam(Memphis);American.addTeam(Navy);American.addTeam(Temple);American.addTeam(USF);American.addTeam(Tulane);
 
         ArrayList<Conference> conferences = new ArrayList<>();
         conferences.add(Big12);
