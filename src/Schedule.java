@@ -39,26 +39,38 @@ public class Schedule {
         weeks.get(week).addGame(away,home,spread,overUnder,spreadSD,overUnderSD);
     }
 
+    public void addGame(int week, Team away, Team home, float spread, float overUnder, float homeWinChance){
+        weeks.get(week).addGame(away,home,spread,overUnder,spreadSD,overUnderSD,homeWinChance);
+    }
+
+    public void addGame(int week, String away, Team home, float spread, float overUnder, float homeWinChance){
+        weeks.get(week).addGame(away,home,spread,overUnder,spreadSD,overUnderSD,homeWinChance);
+    }
+
+    public void addGame(int week, Team away, String home, float spread, float overUnder, float homeWinChance){
+        weeks.get(week).addGame(away,home,spread,overUnder,spreadSD,overUnderSD,homeWinChance);
+    }
+
     public void recordResults() {
-        for(int i = 0; i < this.league.conferences.size(); i++) {
-            if(this.league.conferences.get(i).hasDivisions) {
-                ArrayList<Team> div1teams = new ArrayList<>(this.league.conferences.get(i).div1.teams);
+        for(int i = 0; i < League.conferences.size(); i++) {
+            if(League.conferences.get(i).hasDivisions) {
+                ArrayList<Team> div1teams = new ArrayList<>(League.conferences.get(i).div1.teams);
                 div1teams.sort(Division.teamComparator);
                 Collections.reverse(div1teams);
-                ArrayList<Team> div2teams = new ArrayList<>(this.league.conferences.get(i).div2.teams);
+                ArrayList<Team> div2teams = new ArrayList<>(League.conferences.get(i).div2.teams);
                 div2teams.sort(Division.teamComparator);
                 Collections.reverse(div2teams);
                 for (int j = 0; j < 7; j++) {
-                    this.league.conferences.get(j).div1.teams.get(j).recordResults(div1teams);
-                    this.league.conferences.get(j).div2.teams.get(j).recordResults(div2teams);
+                    League.conferences.get(i).div1.teams.get(j).recordResults(div1teams);
+                    League.conferences.get(i).div2.teams.get(j).recordResults(div2teams);
                 }
             }
             else{
-                ArrayList<Team> div1teams = new ArrayList<>(this.league.conferences.get(i).div1.teams);
+                ArrayList<Team> div1teams = new ArrayList<>(League.conferences.get(i).div1.teams);
                 div1teams.sort(Division.teamComparator);
                 Collections.reverse(div1teams);
                 for (int j = 0; j < 7; j++) {
-                    this.league.conferences.get(j).div1.teams.get(j).recordResults(div1teams);
+                    League.conferences.get(i).div1.teams.get(j).recordResults(div1teams);
                 }
             }
         }

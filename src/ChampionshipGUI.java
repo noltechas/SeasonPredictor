@@ -77,7 +77,7 @@ public class ChampionshipGUI {
         else{
             lineText = conference.div2.getWinner().name + " -" + abs(line);
         }
-        r01.setText("B1G CHAMPIONSHIP GAME");
+        r01.setText("CONFERENCE CHAMPIONSHIP GAME");
         if(!placedLine)
             r10.setText(conference.div1.getWinner().name + ": " + conference.div1.getWinner().totalWins + "-" + conference.div1.getWinner().totalLosses + " (" + conference.div1.getWinner().conferenceWins + "-" + conference.div1.getWinner().conferenceLosses + ")");
         if(!placedLine)

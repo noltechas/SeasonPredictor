@@ -6,19 +6,21 @@ public class League {
 
     public static ArrayList<Conference> conferences;
     public static ArrayList<Team> independents;
+    public static ArrayList<Team> playoffRankings = new ArrayList<>();
 
     public League(ArrayList<Conference> conferences, ArrayList<Team> independents){
-        this.conferences = new ArrayList<>(conferences);
-        this.independents = independents;
+        League.conferences = new ArrayList<>(conferences);
+        League.independents = independents;
     }
 
     public static ArrayList<Team> getPoll(){
         ArrayList<Team> poll = new ArrayList<>(independents);
-        for(int i = 0; i < conferences.size(); i++){
-            poll.addAll(conferences.get(i).getTeams());
+        for (Conference conference : conferences) {
+            poll.addAll(conference.getTeams());
         }
-        Collections.sort(poll,pollComparator2);
+        poll.sort(pollComparator2);
         Collections.reverse(poll);
+        playoffRankings = poll;
         return poll;
     }
 
@@ -55,9 +57,22 @@ public class League {
     };
 
     public static void printPoll(){
-        ArrayList<Team> poll = new ArrayList<>(getPoll());
+        getPoll();
+        ArrayList<Team> poll = new ArrayList<>(playoffRankings);
         for(int i = 0; i < 25; i++){
             System.out.println((i+1) + ". " + poll.get(i).name + " (" + poll.get(i).totalWins + "-" + poll.get(i).totalLosses + ") Score: " + poll.get(i).getAdjustedScore());
+        }
+    }
+
+    public static void printAllResults(){
+        ArrayList<Team> sortedTeams = new ArrayList<>(independents);
+        for (Conference conference : conferences) {
+            sortedTeams.addAll(conference.getTeams());
+        }
+        sortedTeams.sort(Comparator.comparing(Team::getAverageWins));
+        Collections.reverse(sortedTeams);
+        for(int i = 0; i < 35; i++){
+            System.out.println(i+1 + ". " + sortedTeams.get(i).name + ": " + sortedTeams.get(i).getPlayoffRate()*100 + "% Playoff Rate, " + sortedTeams.get(i).getAverageWins() + " Average Wins");
         }
     }
 }

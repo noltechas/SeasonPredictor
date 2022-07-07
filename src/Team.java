@@ -16,7 +16,7 @@ public class Team {
     public int winsOfOpponents = 0;
     public int winsOfTeamsBeat = 0;
     // These need to update every week
-
+    public boolean conferenceChamp;
 
     public float teamRating;
 
@@ -67,6 +67,11 @@ public class Team {
         this.divisionWins = 0;
         this.divisionLosses = 0;
         this.momentum = 0;
+        this.conferenceChamp = false;
+        this.teamsBeat.clear();
+        this.teamsLost.clear();
+        this.results.clear();
+        this.marginOfVictory = 0;
     }
 
     public void addWin(){
@@ -185,6 +190,9 @@ public class Team {
             this.sixthPlace++;
         if(standings.get(6).name.equals(this.name))
             this.seventhPlace++;
+        if (League.playoffRankings.get(0).name.equals(this.name) || League.playoffRankings.get(1).name.equals(this.name) || League.playoffRankings.get(2).name.equals(this.name) || League.playoffRankings.get(3).name.equals(this.name)) {
+            this.playoffs++;
+        }
 
         clearStats();
     }
@@ -223,6 +231,7 @@ public class Team {
 
     public void addChampionship() {
         this.championships++;
+        this.conferenceChamp = true;
     }
 
     public void addPlayoff() {
@@ -291,19 +300,26 @@ public class Team {
         float avgMOV = 0;
         if(totalWins+totalLosses > 0)
             avgMOV = (float)marginOfVictory/((float)totalWins+(float)totalLosses);
-        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + championships*0.45F + getTeamRating()*0.01F + avgMOV*0.02F;
+        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + getTeamRating()*0.01F + avgMOV*0.00F;
+        if(conferenceChamp)
+            score += 0.45F;
 
         if(totalLosses > 1)
-            score -= 0.466F*totalLosses;
+            score -= 0.32F*totalLosses;
         else
-            score -= 0.3F*totalLosses;
+            score -= 0.15F*totalLosses;
+        if(totalLosses < 2)
+            if(!Objects.equals(conferenceName, "American"))
+                score += 0.5;
+        else
+            score -= 0.45;
 
         if(totalWins > 11)
             score += 0.411F;
         if(conferenceName == "American")
             score -= 0.22F;
 
-        if(championships > 0 && totalLosses <= 1 && !conferenceName.equals("American"))
+        if(conferenceChamp && totalLosses <= 1 && !conferenceName.equals("American"))
             score += 0.33F;
 
         if(totalLosses+totalWins == 13)
@@ -313,5 +329,20 @@ public class Team {
             score += 0.45;
 
         return score;
+    }
+
+    public int getPlayoffs() {
+        return this.playoffs;
+    }
+
+    public float getPlayoffRate(){
+        return (float)getPlayoffs()/totalSeasons;
+    }
+
+    public float getAverageWins(){
+        int totalWins = oneWinSeasons+twoWinSeasons*2+threeWinSeasons*3+fourWinSeasons*4+fiveWinSeasons*5+sixWinSeasons*6+sevenWinSeasons*7+eightWinSeasons*8+nineWinSeasons*9+tenWinSeasons*10+elevenWinSeasons*11+twelveWinSeasons*12+thirteenWinSeasons*13-championships;
+        if((float)totalWins / (float)totalSeasons < 2)
+            System.out.println(name + " " + totalWins + " " + totalSeasons);
+        return (float)totalWins / (float)totalSeasons;
     }
 }
