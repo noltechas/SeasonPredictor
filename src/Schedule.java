@@ -74,5 +74,7 @@ public class Schedule {
                 }
             }
         }
+        League.independents.get(0).recordResults(new ArrayList<>());
+        League.independents.get(1).recordResults(new ArrayList<>());
     }
 }

@@ -496,7 +496,7 @@ public class Main {
         schedule.addGame(9,TCU,WestVirginia, -2.5F,55F,.52F);
         schedule.addGame(9,VirginiaTech,NCState, -7.5F,50F,.841F);
         schedule.addGame(9,Utah,WashingtonState, 6.5F,50F,.189F);
-        schedule.addGame(9,EastCarolina,BYU, -9.5F,50F);
+        schedule.addGame(9,EastCarolina,BYU, -9.5F,50F,.8F);
         schedule.addGame(9,Oregon,Cal, 14.5F,50F,.265F);
         schedule.addGame(9,USF,Houston, -12.5F,55F,.809F);
         schedule.addGame(9,USC,Arizona, 18.5F,52F,.226F);

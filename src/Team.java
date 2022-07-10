@@ -176,24 +176,28 @@ public class Team {
         if(this.totalWins >= 6)
             this.bowling++;
 
-        if(standings.get(0).name.equals(this.name))
-            this.firstPlace++;
-        if(standings.get(1).name.equals(this.name))
-            this.secondPlace++;
-        if(standings.get(2).name.equals(this.name))
-            this.thirdPlace++;
-        if(standings.get(3).name.equals(this.name))
-            this.fourthPlace++;
-        if(standings.get(4).name.equals(this.name))
-            this.fifthPlace++;
-        if(standings.get(5).name.equals(this.name))
-            this.sixthPlace++;
-        if(standings.get(6).name.equals(this.name))
-            this.seventhPlace++;
+        if(standings.size() > 0) {
+            if (standings.get(0).name.equals(this.name))
+                this.firstPlace++;
+            if (standings.get(1).name.equals(this.name))
+                this.secondPlace++;
+            if (standings.get(2).name.equals(this.name))
+                this.thirdPlace++;
+            if (standings.get(3).name.equals(this.name))
+                this.fourthPlace++;
+            if (standings.get(4).name.equals(this.name))
+                this.fifthPlace++;
+            if (standings.get(5).name.equals(this.name))
+                this.sixthPlace++;
+            if (standings.get(6).name.equals(this.name))
+                this.seventhPlace++;
+        }
         if (League.playoffRankings.get(0).name.equals(this.name) || League.playoffRankings.get(1).name.equals(this.name) || League.playoffRankings.get(2).name.equals(this.name) || League.playoffRankings.get(3).name.equals(this.name)) {
             this.playoffs++;
         }
 
+        if(this.totalSeasons <= 0)
+            System.out.println("ERROR WITH " + name);
         clearStats();
     }
 
@@ -290,6 +294,24 @@ public class Team {
         return score;
     }
 
+    public float getSOR(){
+        float score = 0;
+        for(int i = 0; i < teamsBeat.size(); i++){
+            score += teamsBeat.get(i).totalWins;
+        }
+        return score/(totalWins + totalLosses);
+    }
+
+    public float getSOS(){
+        float score = 0;
+        ArrayList<Team> opponents = new ArrayList<>(teamsBeat);
+        opponents.addAll(teamsLost);
+        for(int i = 0; i < opponents.size(); i++){
+            score += opponents.get(i).totalWins;
+        }
+        return score/(totalWins + totalLosses);
+    }
+
     public float getAdjustedScore(){
         String conferenceName;
         if(conference != null)
@@ -297,20 +319,17 @@ public class Team {
         else
             conferenceName = "Independent";
 
-        float avgMOV = 0;
-        if(totalWins+totalLosses > 0)
-            avgMOV = (float)marginOfVictory/((float)totalWins+(float)totalLosses);
-        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + getTeamRating()*0.01F + avgMOV*0.00F;
+        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + getTeamRating()*0.01F + getMOV()*0.1F;
         if(conferenceChamp)
             score += 0.45F;
 
         if(totalLosses > 1)
-            score -= 0.32F*totalLosses;
+            score -= 0.53F*totalLosses;
         else
             score -= 0.15F*totalLosses;
         if(totalLosses < 2)
             if(!Objects.equals(conferenceName, "American"))
-                score += 0.5;
+                score += 0.85;
         else
             score -= 0.45;
 
@@ -328,7 +347,15 @@ public class Team {
         if(totalWins == 13 && !conferenceName.equals("American"))
             score += 0.45;
 
+        score += (getSOR()/2);
+        score += (getSOS()/11);
+
         return score;
+
+    }
+
+    public float getMOV(){
+        return (float)marginOfVictory/((float)totalWins+(float)totalLosses);
     }
 
     public int getPlayoffs() {

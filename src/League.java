@@ -60,8 +60,9 @@ public class League {
         getPoll();
         ArrayList<Team> poll = new ArrayList<>(playoffRankings);
         for(int i = 0; i < 25; i++){
-            System.out.println((i+1) + ". " + poll.get(i).name + " (" + poll.get(i).totalWins + "-" + poll.get(i).totalLosses + ") Score: " + poll.get(i).getAdjustedScore());
+            System.out.println((i+1) + ". " + poll.get(i).name + " (" + poll.get(i).totalWins + "-" + poll.get(i).totalLosses + ") Score: " + poll.get(i).getAdjustedScore() + " (SOR: " + poll.get(i).getSOR() + ")" + " (SOS: " + poll.get(i).getSOS() + ")"+ " (MOV: " + poll.get(i).getMOV()*0.1F + ")");
         }
+        System.out.println("------------------------------------------");
     }
 
     public static void printAllResults(){

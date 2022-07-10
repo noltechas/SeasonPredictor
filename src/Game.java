@@ -18,6 +18,7 @@ public class Game {
     public float spreadSD;
     public float overUnderSD;
     public float homeWinChance = 0;
+    public float originalHomeWinChance = 0;
 
 
     public Game(Team away, Team home, float spread, float overUnder, float spreadSD, float overUnderSD){
@@ -62,6 +63,7 @@ public class Game {
         this.spreadSD = spreadSD;
         this.overUnderSD = overUnderSD;
         this.homeWinChance = homeWinChance;
+        this.originalHomeWinChance = homeWinChance;
     }
 
     public Game(String away, Team home, float spread, float overUnder, float spreadSD, float overUnderSD){
@@ -72,6 +74,7 @@ public class Game {
         this.overUnder = overUnder;
         this.spreadSD = spreadSD;
         this.overUnderSD = overUnderSD;
+        this.originalHomeWinChance = homeWinChance;
     }
 
     public Game(String away, Team home, float spread, float overUnder, float spreadSD, float overUnderSD, float homeWinChance){
@@ -83,23 +86,40 @@ public class Game {
         this.spreadSD = spreadSD;
         this.overUnderSD = overUnderSD;
         this.homeWinChance = homeWinChance;
+        this.originalHomeWinChance = homeWinChance;
     }
 
     public void play() {
         if (Main.usePercentage && this.homeWinChance != 0F) {
             double randomNumber = Math.random();
-            Random random = new Random();
-            int randomScore1 = random.nextInt(50);
-            Random random2 = new Random();
-            int randomScore2 = random2.nextInt(50);
-            int winScore,loseScore;
-            if(randomScore1>randomScore2) {
-                winScore = randomScore1;
-                loseScore = randomScore2;
+
+            float awayWinChance = 1-homeWinChance;
+            float homeAndMomentum,awayAndMomentum;
+            if(home != null)
+                homeAndMomentum = this.homeWinChance+((float)home.momentum)/100;
+            else
+                homeAndMomentum = this.homeWinChance;
+            if(away != null)
+                awayAndMomentum = awayWinChance + ((float)away.momentum)/100;
+            else
+                awayAndMomentum = awayWinChance;
+
+            this.homeWinChance = homeAndMomentum/(awayAndMomentum+homeAndMomentum);
+
+            int winScore = 0,loseScore = 0;
+            if(randomNumber <= homeWinChance){
+                while(loseScore >= winScore){
+                    ArrayList<Integer> scores = playLineGame();
+                    winScore = scores.get(1);
+                    loseScore = scores.get(0);
+                }
             }
-            else {
-                winScore = randomScore2;
-                loseScore = randomScore1;
+            else{
+                while(loseScore >= winScore){
+                    ArrayList<Integer> scores = playLineGame();
+                    winScore = scores.get(0);
+                    loseScore = scores.get(1);
+                }
             }
 
             if(randomNumber <= homeWinChance){
@@ -108,28 +128,45 @@ public class Game {
                     home.marginOfVictory += winScore - loseScore;
                     addResult(home, winScore, loseScore);
                     home.addWin();
-                    if (-this.spread > -14)
-                        home.momentum++;
-                    if (-this.spread > 0)
-                        home.momentum++;
-                    if (-this.spread > 7)
-                        home.momentum++;
-                    if (-this.spread > 14)
-                        home.momentum++;
+                    if (homeWinChance >= 0.9)
+                        home.momentum += 0.5;
+                    else if (homeWinChance >= 0.75)
+                        home.momentum += 1.25;
+                    else if (homeWinChance >= 0.5)
+                        home.momentum += 2;
+                    else if (homeWinChance >= 0.2)
+                        home.momentum += 3;
+                    else if (homeWinChance >= 0.05)
+                        home.momentum += 4;
+                    else if (homeWinChance >= -0.5)
+                        home.momentum += 6;
+                    else{
+                        System.out.println("ERROR IN MOMENTUM, home win");
+                        System.out.println(homeName + " vs " + awayName);
+                        System.out.println(homeWinChance);
+                    }
                 }
                 if (away != null) {
                     away.marginOfVictory += loseScore - winScore;
                     addResult(away, winScore, loseScore);
-                    if (-this.spread > -14)
-                        away.momentum--;
-                    if (-this.spread > 0)
-                        away.momentum--;
-                    if (-this.spread > 7)
-                        away.momentum--;
-                    if (-this.spread > 14)
-                        away.momentum--;
+                    if (homeWinChance >= 0.9)
+                        away.momentum -= 0.5;
+                    else if (homeWinChance >= 0.75)
+                        away.momentum -= 1.25;
+                    else if (homeWinChance >= 0.5)
+                        away.momentum -= 2;
+                    else if (homeWinChance >= 0.2)
+                        away.momentum -= 3;
+                    else if (homeWinChance >= 0.05)
+                        away.momentum -= 4;
+                    else if (homeWinChance >= -0.5)
+                        away.momentum -= 6;
+                    else{
+                        System.out.println("ERROR IN MOMENTUM, home win");
+                        System.out.println(homeName + " vs " + awayName);
+                        System.out.println(homeWinChance);
+                    }
                     away.addLoss();
-                    away.momentum--;
                 }
                 if (home != null && away != null) {
                     this.homeScore = winScore;
@@ -150,28 +187,48 @@ public class Game {
                     home.addLoss();
                     home.marginOfVictory += loseScore - winScore;
                     addResult(home, winScore, loseScore);
-                    if (-this.spread < 14)
-                        home.momentum--;
-                    if (-this.spread < 0)
-                        home.momentum--;
-                    if (-this.spread < -7)
-                        home.momentum--;
-                    if (-this.spread < -14)
-                        home.momentum--;
+                    if (homeWinChance >= 0.9)
+                        home.momentum -= 4;
+                    else if (homeWinChance >= 0.75)
+                        home.momentum -= 3;
+                    else if (homeWinChance >= 0.5)
+                        home.momentum -= 2.5;
+                    else if (homeWinChance >= 0.2)
+                        home.momentum -= 2;
+                    else if (homeWinChance >= 0.05)
+                        home.momentum -= 1.25;
+                    else if (homeWinChance >= -0.5)
+                        home.momentum -= 0.5;
+                    else{
+                        System.out.println("ERROR IN MOMENTUM, away win");
+                        System.out.println(homeName + " vs " + awayName);
+                        System.out.println(home.momentum + " vs " + away.momentum);
+                        System.out.println(homeWinChance);
+                    }
                 }
                 if (away != null) {
                     this.winner = away;
                     away.marginOfVictory += winScore - loseScore;
                     addResult(away, winScore, loseScore);
                     away.addWin();
-                    if (-this.spread < 14)
-                        away.momentum++;
-                    if (-this.spread < 0)
-                        away.momentum++;
-                    if (-this.spread < -7)
-                        away.momentum++;
-                    if (-this.spread < -14)
-                        away.momentum++;
+                    if (homeWinChance >= 0.9)
+                        away.momentum += 4;
+                    else if (homeWinChance >= 0.75)
+                        away.momentum += 3;
+                    else if (homeWinChance >= 0.5)
+                        away.momentum += 2.5;
+                    else if (homeWinChance >= 0.2)
+                        away.momentum += 2;
+                    else if (homeWinChance >= 0.05)
+                        away.momentum += 1.25;
+                    else if (homeWinChance >= -0.5)
+                        away.momentum += 0.5;
+                    else{
+                        System.out.println("ERROR IN MOMENTUM, away win");
+                        System.out.println(homeName + " vs " + awayName);
+                        System.out.println(home.momentum + " vs " + away.momentum);
+                        System.out.println(homeWinChance);
+                    }
                 }
                 if (home != null && away != null) {
                     this.homeScore = loseScore;
@@ -318,6 +375,14 @@ public class Game {
                 }
             }
         }
+
+        if(home!=null)
+            if(home.momentum < -5)
+                home.momentum = -5;
+        if(away!=null)
+            if(away.momentum < -5)
+                away.momentum = -5;
+        this.homeWinChance = this.originalHomeWinChance;
     }
 
     public void addResult(Team team, int winningScore, int losingScore){
@@ -344,6 +409,38 @@ public class Game {
         }
 
         team.results.add(0,text);
+    }
+
+    public ArrayList<Integer> playLineGame(){
+        int netMomentum = 0;
+        if (home == null)
+            netMomentum = -away.momentum;
+        if (away == null)
+            netMomentum = home.momentum;
+        if (home != null && away != null)
+            netMomentum = home.momentum - away.momentum;
+
+        Random r = new Random();
+
+        double val = r.nextGaussian() * this.overUnderSD + 0;
+        int finalPoints = (int) (overUnder + val);
+
+        double val2 = r.nextGaussian() * this.spreadSD + this.spread + ((float) netMomentum * 0.8);
+
+        int homeTeamPoints = finalPoints / 2 + (int) val2 / 2;
+        if (homeTeamPoints < 2)
+            homeTeamPoints = 0;
+        int awayTeamPoints = finalPoints / 2 - (int) val2 / 2;
+        if (awayTeamPoints < 2)
+            awayTeamPoints = 0;
+
+        if (homeTeamPoints == awayTeamPoints)
+            homeTeamPoints += 1;
+
+        ArrayList<Integer> scores = new ArrayList<>();
+        scores.add(homeTeamPoints);
+        scores.add(0,awayTeamPoints);
+        return scores;
     }
 
     public float getSpread(){
