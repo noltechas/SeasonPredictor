@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static boolean singleSeason = false;
+    public static boolean singleSeason = true;
     public static boolean usePercentage = true;
     public static int week = 0;
     public static League league;

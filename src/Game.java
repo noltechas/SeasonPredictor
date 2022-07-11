@@ -4,6 +4,7 @@ import java.util.Random;
 public class Game {
 
     public boolean print = false;
+    public float momentumFactor = 0.5F;
 
     public Team home = null;
     public Team away = null;
@@ -129,17 +130,17 @@ public class Game {
                     addResult(home, winScore, loseScore);
                     home.addWin();
                     if (homeWinChance >= 0.9)
-                        home.momentum += 0.5;
+                        home.momentum += 0.5*momentumFactor;
                     else if (homeWinChance >= 0.75)
-                        home.momentum += 1.25;
+                        home.momentum += 1.25*momentumFactor;
                     else if (homeWinChance >= 0.5)
-                        home.momentum += 2;
+                        home.momentum += 2*momentumFactor;
                     else if (homeWinChance >= 0.2)
-                        home.momentum += 3;
+                        home.momentum += 3*momentumFactor;
                     else if (homeWinChance >= 0.05)
-                        home.momentum += 4;
+                        home.momentum += 4*momentumFactor;
                     else if (homeWinChance >= -0.5)
-                        home.momentum += 6;
+                        home.momentum += 6*momentumFactor;
                     else{
                         System.out.println("ERROR IN MOMENTUM, home win");
                         System.out.println(homeName + " vs " + awayName);
@@ -150,17 +151,17 @@ public class Game {
                     away.marginOfVictory += loseScore - winScore;
                     addResult(away, winScore, loseScore);
                     if (homeWinChance >= 0.9)
-                        away.momentum -= 0.5;
+                        away.momentum -= 0.5*momentumFactor;
                     else if (homeWinChance >= 0.75)
-                        away.momentum -= 1.25;
+                        away.momentum -= 1.25*momentumFactor;
                     else if (homeWinChance >= 0.5)
-                        away.momentum -= 2;
+                        away.momentum -= 2*momentumFactor;
                     else if (homeWinChance >= 0.2)
-                        away.momentum -= 3;
+                        away.momentum -= 3*momentumFactor;
                     else if (homeWinChance >= 0.05)
-                        away.momentum -= 4;
+                        away.momentum -= 4*momentumFactor;
                     else if (homeWinChance >= -0.5)
-                        away.momentum -= 6;
+                        away.momentum -= 6*momentumFactor;
                     else{
                         System.out.println("ERROR IN MOMENTUM, home win");
                         System.out.println(homeName + " vs " + awayName);
@@ -188,17 +189,17 @@ public class Game {
                     home.marginOfVictory += loseScore - winScore;
                     addResult(home, winScore, loseScore);
                     if (homeWinChance >= 0.9)
-                        home.momentum -= 4;
+                        home.momentum -= 4*momentumFactor;
                     else if (homeWinChance >= 0.75)
-                        home.momentum -= 3;
+                        home.momentum -= 3*momentumFactor;
                     else if (homeWinChance >= 0.5)
-                        home.momentum -= 2.5;
+                        home.momentum -= 2.5*momentumFactor;
                     else if (homeWinChance >= 0.2)
-                        home.momentum -= 2;
+                        home.momentum -= 2*momentumFactor;
                     else if (homeWinChance >= 0.05)
-                        home.momentum -= 1.25;
+                        home.momentum -= 1.25*momentumFactor;
                     else if (homeWinChance >= -0.5)
-                        home.momentum -= 0.5;
+                        home.momentum -= 0.5*momentumFactor;
                     else{
                         System.out.println("ERROR IN MOMENTUM, away win");
                         System.out.println(homeName + " vs " + awayName);
@@ -212,17 +213,17 @@ public class Game {
                     addResult(away, winScore, loseScore);
                     away.addWin();
                     if (homeWinChance >= 0.9)
-                        away.momentum += 4;
+                        away.momentum += 4*momentumFactor;
                     else if (homeWinChance >= 0.75)
-                        away.momentum += 3;
+                        away.momentum += 3*momentumFactor;
                     else if (homeWinChance >= 0.5)
-                        away.momentum += 2.5;
+                        away.momentum += 2.5*momentumFactor;
                     else if (homeWinChance >= 0.2)
-                        away.momentum += 2;
+                        away.momentum += 2*momentumFactor;
                     else if (homeWinChance >= 0.05)
-                        away.momentum += 1.25;
+                        away.momentum += 1.25*momentumFactor;
                     else if (homeWinChance >= -0.5)
-                        away.momentum += 0.5;
+                        away.momentum += 0.5*momentumFactor;
                     else{
                         System.out.println("ERROR IN MOMENTUM, away win");
                         System.out.println(homeName + " vs " + awayName);

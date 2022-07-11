@@ -319,9 +319,9 @@ public class Team {
         else
             conferenceName = "Independent";
 
-        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + getTeamRating()*0.01F + getMOV()*0.1F;
+        float score = 1.2F*getTeamsBeatRankings() + 1.5F*getFinalRatings() + getTeamRating()*0.01F + getMOV()*0.075F;
         if(conferenceChamp)
-            score += 0.45F;
+            score += 0.55F;
 
         if(totalLosses > 1)
             score -= 0.53F*totalLosses;
