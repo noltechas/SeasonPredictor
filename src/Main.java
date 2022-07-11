@@ -761,12 +761,15 @@ public class Main {
             championshipGUI = new ChampionshipGUI(League.conferences.get(0).championship, League.conferences.get(0), schedule);
             ChampionshipGUI.placeTeams();
         }
-        else{
+        else if (week == 15){
             for(int i = 0; i < League.conferences.size(); i++) {
                 League.conferences.get(i).playChampionship();
             }
             ChampionshipGUI.placeTeams();
             League.printPoll();
+        }
+        else{
+            PlayoffGUI playoffGUI = new PlayoffGUI(schedule);
         }
         week++;
     }

@@ -10,6 +10,7 @@ public class Team {
     public ArrayList<String> results = new ArrayList<>();
     public ArrayList<Team> teamsBeat = new ArrayList<>();
     public ArrayList<Team> teamsLost = new ArrayList<>();
+    public String seed;
 
     public int momentum = 0;
     public int marginOfVictory = 0;

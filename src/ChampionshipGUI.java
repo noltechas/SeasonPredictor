@@ -37,6 +37,7 @@ public class ChampionshipGUI {
         frame = new JFrame();
         panel = new JPanel();
         label = new JLabel("B1G Championship");
+        frame.setPreferredSize(new Dimension(800,250));
 
         int i = 6;
         int j = 4;
@@ -97,6 +98,8 @@ public class ChampionshipGUI {
         public void actionPerformed(ActionEvent e){
             try {
                 Main.advanceWeek(schedule);
+                if(Main.week > 16)
+                    frame.dispose();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

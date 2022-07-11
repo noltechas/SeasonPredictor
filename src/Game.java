@@ -262,15 +262,16 @@ public class Game {
             int finalPoints = (int) (overUnder + val);
 
             if (this.spread + ((float) netMomentum * 1) > 0) {
-                if (Main.singleSeason)
-                    System.out.println("Line: " + this.homeName + " " + -(this.spread + ((float) netMomentum * 0.75)));
+                //if (Main.singleSeason)
+                    //System.out.println("Line: " + this.homeName + " " + -(this.spread + ((float) netMomentum * 0.75)));
             }
             if (this.spread + ((float) netMomentum * 1) <= 0) {
-                if (Main.singleSeason)
-                    System.out.println("Line: " + this.homeName + " +" + -(this.spread + ((float) netMomentum * 0.75)));
+                //if (Main.singleSeason)
+                    //System.out.println("Line: " + this.homeName + " +" + -(this.spread + ((float) netMomentum * 0.75)));
             }
 
-            double val2 = r.nextGaussian() * this.spreadSD + this.spread + ((float) netMomentum * 0.8);
+
+            double val2 = r.nextGaussian() * this.spreadSD + this.spread + ((float) netMomentum);
 
             int homeTeamPoints = finalPoints / 2 + (int) val2 / 2;
             if (homeTeamPoints < 2)
@@ -284,7 +285,7 @@ public class Game {
                 if (Main.singleSeason)
                     System.out.println(this.awayName + ": " + awayTeamPoints + ", " + this.homeName + ": " + homeTeamPoints + " (OT)");
             } else {
-                if (Main.singleSeason)
+                if (Main.singleSeason && Main.week < 14)
                     System.out.println(this.awayName + ": " + awayTeamPoints + ", " + this.homeName + ": " + homeTeamPoints);
             }
 
